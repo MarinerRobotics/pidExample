@@ -1,0 +1,26 @@
+class Drive:
+{
+    int P, I, D, error, setpoint, rcw;
+    public:
+
+    Drive(){
+        P, I, D = 0;
+        error, setpoint, rcw = 0;
+
+    }
+
+    void setSetpoint(int setpoint){
+        this.setpoint = setpoint;
+    }
+    void PID(){
+        error = setpoint - gyro.getAngle() // Error = Target - Actual
+        this.integral += (error*.02) // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
+        derivative = (error - this.previous_error) / .02
+        rcw = P*error + I*self.integral + D*derivative
+    }
+
+    void execute(){
+        PID();
+        robotDrive.arcadeDrive(0, rcw);
+    }
+}
